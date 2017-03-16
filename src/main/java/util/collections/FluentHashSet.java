@@ -16,6 +16,10 @@ public class FluentHashSet<T> extends Fluent<HashSet<T>> {
     super(set);
   }
 
+  public static <T> FluentHashSet<T> fluent(HashSet<T> set) {
+    return new FluentHashSet<>(set);
+  }
+
   public FluentHashSet<T> add(T t) {
     return d0(s -> s.add(t));
   }

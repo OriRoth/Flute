@@ -16,6 +16,10 @@ public class FluentHashMap<K, V> extends Fluent<HashMap<K, V>> {
     super(map);
   }
   
+  public static <K, V> FluentHashMap<K, V> fluent(HashMap<K, V> map) {
+    return new FluentHashMap<>(map);
+  }
+  
   public FluentHashMap<K, V> put(K key, V value) {
     d0(m -> m.put(key, value));
     return this;
