@@ -16,7 +16,7 @@ public class FluentHashSet<T> extends Fluent<HashSet<T>> {
     super(set);
   }
 
-  public static <T> FluentHashSet<T> fluent(HashSet<T> set) {
+  public static <T> FluentHashSet<T> fluentSet(HashSet<T> set) {
     return new FluentHashSet<>(set);
   }
 

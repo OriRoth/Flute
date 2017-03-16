@@ -16,7 +16,7 @@ public class FluentHashMap<K, V> extends Fluent<HashMap<K, V>> {
     super(map);
   }
   
-  public static <K, V> FluentHashMap<K, V> fluent(HashMap<K, V> map) {
+  public static <K, V> FluentHashMap<K, V> fluentMap(HashMap<K, V> map) {
     return new FluentHashMap<>(map);
   }
   
