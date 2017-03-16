@@ -16,6 +16,11 @@ public class Fluent<O> {
     return new Fluent<>(object);
   }
   
+  public static <O> O fluent(O object, Consumer<O> action) {
+    action.accept(object);
+    return object;
+  }
+  
   public static <O> Fluent<O> silent(O object) {
     Fluent<O> ret = new Fluent<O>(object);
     ret.invalid = true;

@@ -37,7 +37,7 @@ public class Lazy {
 
       @Override
       public R apply(T t) {
-        return results.ifNotPresent(t).put(t, function.apply(t)).get(t);
+        return results.ifNotContainsKey(t).put(t, function.apply(t)).get(t);
       }
     };
   }

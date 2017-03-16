@@ -14,7 +14,7 @@ public class Initializable<T> {
     return new Initializable<T>().set(t);
   }
 
-  public Initializable<T> set(T value) throws IllegalStateException {
+  public Initializable<T> set(T value) {
     if (initialized)
       throw new IllegalStateException();
     initialized = true;

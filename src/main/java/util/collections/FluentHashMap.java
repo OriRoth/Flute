@@ -15,26 +15,41 @@ public class FluentHashMap<K, V> extends Fluent<HashMap<K, V>> {
   public FluentHashMap(HashMap<K, V> map) {
     super(map);
   }
-  
+
   public static <K, V> FluentHashMap<K, V> fluentMap(HashMap<K, V> map) {
     return new FluentHashMap<>(map);
   }
-  
-  public FluentHashMap<K, V> put(K key, V value) {
-    d0(m -> m.put(key, value));
-    return this;
+
+  public FluentHashMap<K, V> clear() {
+    return d0(m -> m.clear());
   }
-  
+
+  public FluentHashMap<K, V> put(K key, V value) {
+    return d0(m -> m.put(key, value));
+  }
+
   public V get(K key) {
     return origin().get(key);
   }
   
-  public FluentHashMap<K, V> ifPresent(K key) {
+  public int size() {
+    return origin().size();
+  }
+
+  public FluentHashMap<K, V> ifContainsKey(K key) {
     return validate(m -> m.containsKey(key));
   }
-  
-  public FluentHashMap<K, V> ifNotPresent(K key) {
+
+  public FluentHashMap<K, V> ifNotContainsKey(K key) {
     return validate(m -> !m.containsKey(key));
+  }
+
+  public FluentHashMap<K, V> ifContainsValue(V value) {
+    return validate(m -> m.containsValue(value));
+  }
+
+  public FluentHashMap<K, V> ifNotContainsValue(V value) {
+    return validate(m -> !m.containsValue(value));
   }
 
   @Override
