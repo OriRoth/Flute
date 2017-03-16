@@ -15,7 +15,7 @@ public class Lazy {
       Initializable<T> value = initializable();
 
       public T get() {
-        return value.suggest(supplier.get());
+        return value.suggest(supplier);
       }
     };
   }

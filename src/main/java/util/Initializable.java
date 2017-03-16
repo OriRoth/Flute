@@ -1,5 +1,7 @@
 package util;
 
+import java.util.function.Supplier;
+
 public class Initializable<T> {
   private T value;
   private boolean initialized;
@@ -28,7 +30,7 @@ public class Initializable<T> {
     return initialized;
   }
 
-  public T suggest(T value) {
-    return initialized() ? get() : set(value).get();
+  public T suggest(Supplier<T> supplier) {
+    return initialized() ? get() : set(supplier.get()).get();
   }
 }
