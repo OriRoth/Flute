@@ -1,4 +1,4 @@
-package util;
+package util.mutable;
 
 import static util.Test.*;
 

@@ -4,7 +4,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import util.collections.FluentHashMap;
+import util.collections.FluentMap;
 import util.collections.Seen;
 
 import static util.Initializable.*;
@@ -33,7 +33,7 @@ public class Lazy {
 
   public static <T, R> Function<T, R> lazy(Function<T, R> function) {
     return new Function<T, R>() {
-      FluentHashMap<T, R> results = new FluentHashMap<>();
+      FluentMap<T, R> results = new FluentMap<>();
 
       @Override
       public R apply(T t) {
