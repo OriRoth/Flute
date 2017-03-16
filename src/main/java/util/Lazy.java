@@ -1,15 +1,13 @@
 package util;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import util.collections.FluentHashMap;
 import util.collections.Seen;
 
 import static util.Initializable.*;
-import static util.Fluent.*;
 
 public class Lazy {
   public static <T> Supplier<T> lazy(Supplier<T> supplier) {
@@ -35,12 +33,11 @@ public class Lazy {
 
   public static <T, R> Function<T, R> lazy(Function<T, R> function) {
     return new Function<T, R>() {
-      Map<T, R> results = new HashMap<>();
+      FluentHashMap<T, R> results = new FluentHashMap<>();
 
       @Override
       public R apply(T t) {
-        return fluent(results).validate(m -> !m.containsKey(t)) //
-            .d0(m -> m.put(t, function.apply(t))).halt().get(t);
+        return results.ifNotPresent(t).put(t, function.apply(t)).get(t);
       }
     };
   }

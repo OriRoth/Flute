@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 
 public class Fluent<O> {
   private final O inner;
+  private boolean invalid;
 
   public Fluent(O object) {
     inner = object;
@@ -14,41 +15,34 @@ public class Fluent<O> {
   public static <O> Fluent<O> fluent(O object) {
     return new Fluent<>(object);
   }
+  
+  public static <O> Fluent<O> silent(O object) {
+    Fluent<O> ret = new Fluent<O>(object);
+    ret.invalid = true;
+    return ret;
+  }
 
   public Fluent<O> d0(Consumer<O> action) {
-    action.accept(inner);
+    if (!invalid)
+      action.accept(inner);
     return this;
   }
 
   public <T> Fluent<T> lane(Function<O, T> action) {
-    return new Fluent<T>(action.apply(inner));
+    if (!invalid)
+      return new Fluent<T>(action.apply(inner));
+    Fluent<T> ret = new Fluent<T>(null);
+    ret.invalid = true;
+    return ret;
   }
 
-  @SuppressWarnings("unchecked")
   public Fluent<O> validate(Predicate<O> predicate) {
-    return predicate.test(inner) ? this : (Fluent<O>) EMPTY;
+    if (!invalid && !predicate.test(inner))
+      invalid = true;
+    return this;
   }
 
-  public O halt() {
+  public O origin() {
     return inner;
   }
-
-  // TODO Roth: consider replacing with dynamic empty()
-  @SuppressWarnings({ "rawtypes", "unchecked" })
-  private static final Fluent<?> EMPTY = new Fluent(null) {
-    @Override
-    public Fluent<?> d0(Consumer action) {
-      return this;
-    }
-
-    @Override
-    public Fluent<?> lane(Function action) {
-      return this;
-    }
-
-    @Override
-    public Fluent<?> validate(Predicate predicate) {
-      return this;
-    }
-  };
 }
