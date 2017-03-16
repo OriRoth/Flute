@@ -5,7 +5,7 @@ import static util.Test.*;
 import java.util.Objects;
 
 public class M<T> {
-  private T value;
+  protected T value;
 
   public M(T value) {
     this.value = value;
@@ -26,7 +26,7 @@ public class M<T> {
 
   @Override
   public String toString() {
-    return value == null ? "null" : value.toString();
+    return String.valueOf(value);
   }
 
   @Override
@@ -40,7 +40,7 @@ public class M<T> {
   }
   
   @Override
-  protected Object clone() throws CloneNotSupportedException {
+  protected Object clone() {
     return new M<>(value);
   }
 }
