@@ -82,7 +82,7 @@ public class Collections {
 
       @Override
       public Set<K> keySet() {
-        return all();
+        return !cleared ? all() : defined.keySet();
       }
 
       @Override
