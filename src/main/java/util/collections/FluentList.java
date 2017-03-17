@@ -78,4 +78,9 @@ public class FluentList<T> extends Fluent<List<T>> {
   public FluentList<T> validate(Predicate<List<T>> predicate) {
     return (FluentList<T>) super.validate(predicate);
   }
+  
+  @Override
+  public FluentList<T> elze() {
+    return (FluentList<T>) super.elze();
+  }
 }

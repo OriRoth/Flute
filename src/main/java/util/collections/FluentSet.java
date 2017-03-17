@@ -74,4 +74,9 @@ public class FluentSet<T> extends Fluent<Set<T>> {
   public FluentSet<T> validate(Predicate<Set<T>> predicate) {
     return (FluentSet<T>) super.validate(predicate);
   }
+  
+  @Override
+  public FluentSet<T> elze() {
+    return (FluentSet<T>) super.elze();
+  }
 }

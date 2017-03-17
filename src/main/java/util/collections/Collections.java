@@ -1,6 +1,7 @@
 package util.collections;
 
 import static util.Lazy.lazy;
+import static util.Fluent.fluent;
 
 import java.util.AbstractMap;
 import java.util.Arrays;
@@ -14,21 +15,21 @@ import java.util.Set;
 import java.util.function.Function;
 
 public class Collections {
-  public <K, V> Map.Entry<K, V> entry(K key, V value) {
+  public static <K, V> Map.Entry<K, V> entry(K key, V value) {
     return new AbstractMap.SimpleEntry<>(key, value);
   }
 
-  public <K, V> Map<K, V> map(@SuppressWarnings("unchecked") Map.Entry<K, V>... entries) {
+  public static <K, V> Map<K, V> map(@SuppressWarnings("unchecked") Map.Entry<K, V>... entries) {
     Map<K, V> ret = new HashMap<>();
     Arrays.stream(entries).forEach(e -> ret.put(e.getKey(), e.getValue()));
     return ret;
   }
 
-  public <K, V> Map<K, V> factory(Function<K, V> function) {
+  public static <K, V> Map<K, V> factory(Function<K, V> function) {
     Objects.requireNonNull(function);
     return new Map<K, V>() {
       final Function<K, V> f = lazy(function);
-      FluentMap<K, V> defined = new FluentMap<>();
+      Map<K, V> defined = new HashMap<>();
       boolean cleared;
 
       @Override
@@ -59,13 +60,13 @@ public class Collections {
 
       @Override
       public V put(K key, V value) {
-        return defined.put(key, value).lane(m -> f.apply(key)).origin();
+        return fluent(defined.put(key, value)).d0(__ -> f.apply(key)).origin();
       }
 
       @SuppressWarnings("unchecked")
       @Override
       public V remove(Object key) {
-        return defined.origin().replace((K) key, null);
+        return defined.replace((K) key, null);
       }
 
       @Override
@@ -93,10 +94,15 @@ public class Collections {
       public Set<java.util.Map.Entry<K, V>> entrySet() {
         throw new UnsupportedOperationException();
       }
+
+      @Override
+      public String toString() {
+        return !cleared ? "{...}" : defined.toString();
+      }
     };
   }
 
-  public <T> Set<T> all() {
+  public static <T> Set<T> all() {
     return new Set<T>() {
       Set<T> defined;
       Set<T> undefined = new HashSet<>();
@@ -148,6 +154,7 @@ public class Collections {
       @Override
       public boolean containsAll(Collection<?> c) {
         return cleared ? defined.containsAll(c) //
+            // "c" then "undefined"!
             : java.util.Collections.disjoint(c, undefined);
       }
 
@@ -185,6 +192,11 @@ public class Collections {
           defined = new HashSet<>();
           undefined = null;
         }
+      }
+
+      @Override
+      public String toString() {
+        return !cleared ? "[...]" : defined.toString();
       }
     };
   }

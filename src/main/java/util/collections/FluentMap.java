@@ -78,4 +78,9 @@ public class FluentMap<K, V> extends Fluent<Map<K, V>> {
   public FluentMap<K, V> validate(Predicate<Map<K, V>> predicate) {
     return (FluentMap<K, V>) super.validate(predicate);
   }
+  
+  @Override
+  public FluentMap<K, V> elze() {
+    return (FluentMap<K, V>) super.elze();
+  }
 }
