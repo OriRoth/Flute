@@ -29,7 +29,7 @@ public class FluentSet<T> extends Fluent<Set<T>> {
     return d0(s -> s.addAll(collection));
   }
 
-  public FluentSet<T> remove(T t) {
+  public FluentSet<T> remove(Object t) {
     return d0(s -> s.remove(t));
   }
 
@@ -39,6 +39,22 @@ public class FluentSet<T> extends Fluent<Set<T>> {
 
   public int size() {
     return origin().size();
+  }
+  
+  public boolean isEmpty() {
+    return origin().isEmpty();
+  }
+  
+  public boolean contains(Object o) {
+    return origin().contains(o);
+  }
+  
+  public boolean containsAll(Collection<?> c) {
+    return origin().containsAll(c);
+  }
+  
+  public FluentSet<T> clear() {
+    return d0(s -> s.clear());
   }
 
   public FluentSet<T> ifContains(T t) {

@@ -29,12 +29,28 @@ public class FluentMap<K, V> extends Fluent<Map<K, V>> {
     return d0(m -> m.put(key, value));
   }
 
-  public V get(K key) {
+  public FluentMap<K, V> putAll(Map<? extends K, ? extends V> map) {
+    return d0(m -> m.putAll(map));
+  }
+
+  public V get(Object key) {
     return origin().get(key);
   }
   
   public int size() {
     return origin().size();
+  }
+  
+  public boolean isEmpty() {
+    return origin().isEmpty();
+  }
+  
+  public boolean containsKey(Object key) {
+    return origin().containsKey(key);
+  }
+  
+  public FluentMap<K, V> remove(Object key) {
+    return d0(m -> m.remove(key));
   }
 
   public FluentMap<K, V> ifContainsKey(K key) {

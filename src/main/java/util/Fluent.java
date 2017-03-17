@@ -20,6 +20,10 @@ public class Fluent<O> {
     action.accept(object);
     return object;
   }
+
+  public static Fluent<Void> fluentIf(boolean condition) {
+    return condition ? fluent(null) : silent(null);
+  }
   
   public static <O> Fluent<O> silent(O object) {
     Fluent<O> ret = new Fluent<O>(object);
@@ -44,6 +48,11 @@ public class Fluent<O> {
   public Fluent<O> validate(Predicate<O> predicate) {
     if (!invalid && !predicate.test(inner))
       invalid = true;
+    return this;
+  }
+  
+  public Fluent<O> elze() {
+    invalid = !invalid;
     return this;
   }
 
