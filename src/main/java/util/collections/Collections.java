@@ -1,6 +1,5 @@
 package util.collections;
 
-import static util.Cast.supplier;
 import static util.Fluent.fluent;
 import static util.Initializable.initializable;
 import static util.Lazy.lazy;
@@ -237,6 +236,6 @@ public class Collections {
 
   public static Iterable<Integer> range(int start, int end) {
     return range(fluent(new MInteger(start)) //
-        .lane(m -> supplier(() -> fluent(m.intValue(), v -> m.set(v + 1)))).origin(), end);
+        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.set(v + 1))).origin(), end);
   }
 }
