@@ -1,7 +1,11 @@
 package util.collections;
 
-import static util.Lazy.lazy;
+import static util.Cast.supplier;
 import static util.Fluent.fluent;
+import static util.Initializable.initializable;
+import static util.Lazy.lazy;
+import static util.Test.equalsNullable;
+import static util.mutable.M.mutable;
 
 import java.util.AbstractMap;
 import java.util.Arrays;
@@ -13,6 +17,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Supplier;
+
+import util.Initializable;
+import util.mutable.M;
+import util.mutable.MInteger;
 
 public class Collections {
   public static <K, V> Map.Entry<K, V> entry(K key, V value) {
@@ -199,5 +208,35 @@ public class Collections {
         return !cleared ? "[...]" : defined.toString();
       }
     };
+  }
+
+  public static <T> Iterable<T> range(Supplier<T> supplier) {
+    return range(supplier, null);
+  }
+
+  public static <T> Iterable<T> range(Supplier<T> supplier, T stop) {
+    return new Iterable<T>() {
+      @Override
+      public Iterator<T> iterator() {
+        return new Iterator<T>() {
+          M<Initializable<T>> next = mutable(initializable());
+
+          @Override
+          public boolean hasNext() {
+            return !equalsNullable(next.get().suggest(supplier), stop);
+          }
+
+          @Override
+          public T next() {
+            return fluent(next.get().suggest(supplier), __ -> next.set(initializable()));
+          }
+        };
+      }
+    };
+  }
+
+  public static Iterable<Integer> range(int start, int end) {
+    return range(fluent(new MInteger(start)) //
+        .lane(m -> supplier(() -> fluent(m.intValue(), v -> m.set(v + 1)))).origin(), end);
   }
 }
