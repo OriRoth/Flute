@@ -7,7 +7,7 @@ public interface Tree<T> extends Collection<T> {
 
   Collection<? extends Tree<T>> descendants();
   
-  boolean addChild();
+  boolean addChild(Tree<T> child);
   
   boolean removeChild(Tree<T> child);
   
