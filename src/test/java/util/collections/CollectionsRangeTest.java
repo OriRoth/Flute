@@ -4,7 +4,7 @@ import static util.collections.Collections.*;
 
 import org.junit.Test;
 
-public class CollectionsExpandTest {
+public class CollectionsRangeTest {
   @Test
   public void a() {
     for (int i : range(0, 10))
