@@ -7,7 +7,7 @@ public class Test {
     return o1 == null ? o2 == null : o1.equals(o2);
   }
 
-  public static boolean equalsIgnoreOrder(Collection<?> c1, Collection<?> c2) {
+  public static boolean collectionsEquals(Collection<?> c1, Collection<?> c2) {
     return c1 == null ? c2 == null : c2 == null ? false : c1.containsAll(c2) && c2.containsAll(c1);
   }
 }

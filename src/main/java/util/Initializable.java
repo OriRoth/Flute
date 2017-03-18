@@ -3,17 +3,51 @@ package util;
 import java.util.Objects;
 import java.util.function.Supplier;
 
+import util.mutable.M;
+
 import static util.Test.*;
 
 /**
- * A lazy wrapper for object.
+ * A lazy wrapper for some object. Used for fluent lazy varying initialization:
+ * <code>
+ * class GUI {
+ *   Picture logo;
+ *   ...
+ *   if (logo == null)
+ *     logo = loadPicture("logo1");
+ *   logo. ...
+ *   ...
+ *   if (logo == null)
+ *     logo = loadPicture("logo2");
+ *   logo. ...
+ *   ...
+ *   assert logo != null;
+ *   logo.show();
+ *   ...
+ * }
+ * </code> ==> <code>
+ * class GUI {
+ *   Initializable<Picture> logo = initializable();
+ *   ...
+ *   logo.suggest(() -> loadPicture("logo1")). ...
+ *   ...
+ *   logo.suggest(() -> loadPicture("logo2")). ...
+ *   ...
+ *   logo.show();
+ *   ...
+ * }
+ * </code>
  * 
  * @author Ori Roth
  * @since Mar 18, 2017
+ * @see Lazy#lazy(Supplier)
  */
-public class Initializable<T> {
-  private T value;
+public class Initializable<T> extends M<T> {
   private boolean initialized;
+
+  private Initializable(T value) {
+    super(value);
+  }
 
   /**
    * @return an empty initializable
@@ -21,7 +55,7 @@ public class Initializable<T> {
    * @see #get
    */
   public static <T> Initializable<T> initializable() {
-    return new Initializable<>();
+    return new Initializable<>(null);
   }
 
   /**
@@ -30,7 +64,7 @@ public class Initializable<T> {
    * @return initialized initializable
    */
   public static <T> Initializable<T> initializable(T t) {
-    return new Initializable<T>().set(t);
+    return new Initializable<T>(t);
   }
 
   /**
@@ -43,7 +77,7 @@ public class Initializable<T> {
    * @throws IllegalStateException
    *           if this initializable is already initialized
    */
-  protected Initializable<T> set(T value) {
+  protected Initializable<T> setValue(T value) {
     if (initialized)
       throw new IllegalStateException();
     initialized = true;
@@ -74,7 +108,7 @@ public class Initializable<T> {
    * @return the wrapped object in this initializable
    */
   public T suggest(Supplier<T> supplier) {
-    return initialized() ? get() : set(supplier.get()).get();
+    return initialized() ? get() : setValue(supplier.get()).get();
   }
 
   @Override

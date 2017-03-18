@@ -19,20 +19,84 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 import util.Initializable;
+import util.Lazy;
 import util.mutable.M;
 import util.mutable.MInteger;
 
+/**
+ * Collections utilities.
+ * 
+ * @author Ori Roth
+ * @since Mar 18, 2017
+ */
 public class Collections {
+  /**
+   * Easy map entry creation using {@link AbstractMap.SimpleEntry}.
+   * 
+   * @param key
+   *          JD
+   * @param value
+   *          JD
+   * @return entry from key and value
+   */
   public static <K, V> Map.Entry<K, V> entry(K key, V value) {
     return new AbstractMap.SimpleEntry<>(key, value);
   }
 
+  /**
+   * Easy map creation using entries.
+   * 
+   * @param entries
+   *          JD
+   * @return map from entries
+   */
   public static <K, V> Map<K, V> map(@SuppressWarnings("unchecked") Map.Entry<K, V>... entries) {
     Map<K, V> ret = new HashMap<>();
     Arrays.stream(entries).forEach(e -> ret.put(e.getKey(), e.getValue()));
     return ret;
   }
 
+  /**
+   * Easy map creation using entries.
+   * 
+   * @param entries
+   *          JD
+   * @return map from entries
+   */
+  public static <K, V> Map<K, V> map(Iterable<Map.Entry<K, V>> entries) {
+    Map<K, V> ret = new HashMap<>();
+    entries.forEach(e -> ret.put(e.getKey(), e.getValue()));
+    return ret;
+  }
+
+  /**
+   * Converts a {@link Function} to a {@link Map}. The map contains keys from
+   * input {@link Iterable}, and the values are calculated by the input
+   * function.
+   * 
+   * @param function
+   *          calculates values
+   * @param keys
+   *          all keys
+   * @return map containing keys by the iterable and values by the function
+   */
+  public static <K, V> Map<K, V> map(Function<K, V> function, Iterable<K> keys) {
+    Map<K, V> ret = new HashMap<>();
+    keys.forEach(k -> ret.put(k, function.apply(k)));
+    return ret;
+  }
+
+  /**
+   * Converts a {@link Function} to a {@link Map}. The returned map declares
+   * itself to contain all keys, and uses the input function to calculate values
+   * lazily. Unsupported methods: {@link Map#containsValue(Object)},
+   * {@link Map#values()}, {@link Map#entrySet()}.
+   * 
+   * @param function
+   *          JD
+   * @return a map calculated by the function
+   * @see Lazy#lazy(Function)
+   */
   public static <K, V> Map<K, V> factory(Function<K, V> function) {
     Objects.requireNonNull(function);
     return new Map<K, V>() {
@@ -110,6 +174,13 @@ public class Collections {
     };
   }
 
+  /**
+   * Creates a set that contains all values. Unsupported methods:
+   * {@link Set#iterator()}, {@link Set#toArray()},
+   * {@link Set#toArray(Object[])}.
+   * 
+   * @return
+   */
   public static <T> Set<T> all() {
     return new Set<T>() {
       Set<T> defined;
@@ -209,10 +280,30 @@ public class Collections {
     };
   }
 
+  /**
+   * Creates an {@link Iterable} whose values are evaluated by a
+   * {@link Supplier}, until null is received.
+   * 
+   * @param supplier
+   *          content evaluetor
+   * @return iterable from supplier
+   * @see #range(Supplier, Object)
+   */
   public static <T> Iterable<T> range(Supplier<T> supplier) {
     return range(supplier, null);
   }
 
+  /**
+   * Creates an {@link Iterable} whose values are evaluated by a
+   * {@link Supplier}, until a certain object is received. This stop object
+   * would not be included in resulting iterable.
+   * 
+   * @param supplier
+   *          content evaluetor
+   * @param stop
+   *          on which supplier evaluation will stop
+   * @return iterable from supplier
+   */
   public static <T> Iterable<T> range(Supplier<T> supplier, T stop) {
     return new Iterable<T>() {
       @Override
@@ -227,15 +318,23 @@ public class Collections {
 
           @Override
           public T next() {
-            return fluent(next.get().suggest(supplier), __ -> next.accept(initializable()));
+            return fluent(next.get().suggest(supplier), __ -> next.set(initializable()));
           }
         };
       }
     };
   }
 
+  /**
+   * @param start
+   *          range start
+   * @param end
+   *          range end
+   * @return integer iterable from start to end (not include)
+   * @see #range(Supplier, Object)
+   */
   public static Iterable<Integer> range(int start, int end) {
     return range((Supplier<Integer>) fluent(new MInteger(start)) //
-        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.accept(v + 1))), end);
+        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.set(v + 1))), end);
   }
 }

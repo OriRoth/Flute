@@ -20,7 +20,7 @@ public interface Fluent<S, T> {
 
   public default S validate(Predicate<T> predicate) {
     if (validator().get() && !predicate.test(target()))
-      validator().accept(false);
+      validator().set(false);
     return (S) this;
   }
 

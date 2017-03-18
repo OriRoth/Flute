@@ -26,7 +26,7 @@ public class FluentWrapper<O> implements Fluent<FluentWrapper<O>, O> {
 
   public static <O> FluentWrapper<O> silent(O object) {
     FluentWrapper<O> ret = new FluentWrapper<O>(object);
-    ret.validator.accept(false);
+    ret.validator.set(false);
     return ret;
   }
 

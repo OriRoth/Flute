@@ -11,7 +11,7 @@ public class MBoolean extends M<Boolean> {
   }
 
   public MBoolean toggle() {
-    accept(!get());
+    set(!get());
     return this;
   }
 }
