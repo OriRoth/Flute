@@ -1,5 +1,11 @@
 package util.mutable;
 
+/**
+ * Mutable boolean.
+ * 
+ * @author Ori Roth
+ * @since Mar 18, 2017
+ */
 public class MBoolean extends M<Boolean> {
 
   public MBoolean(Boolean value) {

@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import util.FluentAPI;
 import util.fluent.FluentWrapper;
 
+@FluentAPI
 public class FluentList<T> extends FluentWrapper<List<T>> {
   public FluentList() {
     super(new LinkedList<>());
@@ -17,34 +19,42 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
     super(object);
   }
 
+  @FluentAPI
   public static <T> FluentList<T> fluent(List<T> list) {
     return new FluentList<>(list);
   }
 
+  @FluentAPI
   public FluentList<T> add(T t) {
     return d0(l -> l.add(t));
   }
 
+  @FluentAPI
   public FluentList<T> addAll(Collection<? extends T> collection) {
     return d0(l -> l.addAll(collection));
   }
 
+  @FluentAPI
   public FluentList<T> remove(T t) {
     return d0(l -> l.remove(t));
   }
 
+  @FluentAPI
   public FluentList<T> removeAll(Collection<? extends T> collection) {
     return d0(l -> l.removeAll(collection));
   }
 
+  @FluentAPI
   public FluentList<T> set(int index, T element) {
     return d0(l -> l.set(index, element));
   }
 
+  @FluentAPI
   public FluentList<T> clear() {
     return d0(l -> l.clear());
   }
 
+  @FluentAPI
   public FluentList<T> forEach(Consumer<? super T> action) {
     return d0(l -> l.forEach(action));
   }
@@ -57,26 +67,32 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
     return origin().get(index);
   }
 
+  @FluentAPI
   public FluentList<T> ifEmpty() {
     return validate(l -> l.isEmpty());
   }
 
+  @FluentAPI
   public FluentList<T> ifNotEmpty() {
     return validate(l -> !l.isEmpty());
   }
 
+  @FluentAPI
   public FluentList<T> ifContains(T t) {
     return validate(l -> l.contains(t));
   }
 
+  @FluentAPI
   public FluentList<T> ifNotContains(T t) {
     return validate(l -> !l.contains(t));
   }
 
+  @FluentAPI
   public FluentList<T> ifContainsAll(Collection<? extends T> collection) {
     return validate(l -> l.containsAll(collection));
   }
 
+  @FluentAPI
   public FluentList<T> ifNotContainsAll(Collection<? extends T> collection) {
     return validate(l -> !l.containsAll(collection));
   }
