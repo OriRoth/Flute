@@ -235,7 +235,7 @@ public class Collections {
   }
 
   public static Iterable<Integer> range(int start, int end) {
-    return range(fluent(new MInteger(start)) //
-        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.set(v + 1))).origin(), end);
+    return range((Supplier<Integer>) fluent(new MInteger(start)) //
+        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.set(v + 1))), end);
   }
 }
