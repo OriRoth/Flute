@@ -1,9 +1,14 @@
 package util.trees;
 
+import static util.IterableWrapper.*;
+import static util.Test.*;
+import static java.util.stream.Collectors.toList;
+import static util.fluent.collections.FluentList.fluent;
+
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.stream.Collectors;
 
+//TODO Roth: complete
 /**
  * A tree interface. In this interface, each node is a tree as well.
  * 
@@ -13,6 +18,12 @@ import java.util.stream.Collectors;
  *          tree node value type
  */
 public interface Tree<T> extends Collection<T> {
+  public static <T> Tree<T> leaf(T t) {
+//    return new Tree<T>() {
+//    };
+    return null;
+  }
+
   /**
    * @return inner node value
    */
@@ -42,6 +53,20 @@ public interface Tree<T> extends Collection<T> {
   boolean removeChild(Tree<T> child);
 
   /**
+   * Removes a direct child from this tree.
+   * 
+   * @param value
+   *          value of the child to remove
+   * @return true iff the child has been removed successfully
+   */
+  default boolean removeValue(T value) {
+    for (Tree<T> c : children())
+      if (equalsNullable(value, c.get()))
+        return removeChild(c);
+    return false;
+  }
+
+  /**
    * @return descendants of this tree
    */
   default Collection<Tree<T>> descendants() {
@@ -63,6 +88,22 @@ public interface Tree<T> extends Collection<T> {
       return true;
     for (Tree<T> child : children())
       if (child.removeDescendant(descendant))
+        return true;
+    return false;
+  }
+
+  /**
+   * Removes descendant from this tree.
+   * 
+   * @param value
+   *          value of descendant to remove
+   * @return true iff the descendant has been successfully removed
+   */
+  default boolean removeDescendantValue(T value) {
+    if (removeValue(value))
+      return true;
+    for (Tree<T> child : children())
+      if (child.removeDescendantValue(value))
         return true;
     return false;
   }
@@ -91,23 +132,37 @@ public interface Tree<T> extends Collection<T> {
 
   @Override
   default boolean contains(Object o) {
-    return descendants().stream().map(t -> t.get()).collect(Collectors.toList()).contains(o);
+    return equalsNullable(o, get()) || descendants().stream().map(t -> t.get()).collect(toList()).contains(o);
   }
 
   @Override
   default Iterator<T> iterator() {
-    Collection<Tree<T>> descs = descendants();
-    return new Iterator<T>() {
-      @Override
-      public boolean hasNext() {
-        return false;
-      }
+    return iterable(get()).then(descendants().stream().map(t -> t.get()).collect(toList())).iterator();
+  }
 
-      @Override
-      public T next() {
-        // TODO Auto-generated method stub
-        return null;
-      }
-    };
+  @Override
+  default Object[] toArray() {
+    return fluent(descendants().stream().map(t -> t.get()).collect(toList())).add(0, get()).toArray();
+  }
+
+  @Override
+  default <X> X[] toArray(X[] a) {
+    return fluent(descendants().stream().map(t -> t.get()).collect(toList())).add(0, get()).toArray(a);
+  }
+
+  @Override
+  default boolean add(T e) {
+    return addChild(leaf(e));
+  }
+
+  @SuppressWarnings("unchecked")
+  @Override
+  default boolean remove(Object o) {
+    return removeDescendantValue((T) o);
+  }
+  
+  @Override
+  default boolean containsAll(Collection<?> c) {
+    return fluent(descendants().stream().map(t -> t.get()).collect(toList())).add(get()).containsAll(c);
   }
 }

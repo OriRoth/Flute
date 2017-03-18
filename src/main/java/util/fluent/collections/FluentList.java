@@ -30,6 +30,11 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
   }
 
   @FluentAPI
+  public FluentList<T> add(int index, T t) {
+    return d0(l -> l.add(index, t));
+  }
+
+  @FluentAPI
   public FluentList<T> addAll(Collection<? extends T> collection) {
     return d0(l -> l.addAll(collection));
   }
@@ -67,6 +72,18 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
     return origin().get(index);
   }
 
+  public Object[] toArray() {
+    return origin().toArray();
+  }
+
+  public <X> X[] toArray(X[] a) {
+    return origin().toArray(a);
+  }
+
+  public boolean containsAll(Collection<?> c) {
+    return origin().containsAll(c);
+  }
+
   @FluentAPI
   public FluentList<T> ifEmpty() {
     return validate(l -> l.isEmpty());
@@ -101,12 +118,12 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
   public FluentList<T> d0(Consumer<List<T>> action) {
     return (FluentList<T>) super.d0(action);
   }
-  
+
   @Override
   public FluentList<T> whileD0(Predicate<List<T>> condition, Consumer<List<T>> action) {
     return (FluentList<T>) super.whileD0(condition, action);
   }
-  
+
   @Override
   public FluentList<T> d0While(Consumer<List<T>> action, Predicate<List<T>> condition) {
     return (FluentList<T>) super.d0While(action, condition);

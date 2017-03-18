@@ -1,49 +1,13 @@
 package util.trees;
 
 import java.util.Collection;
-import java.util.Iterator;
 
+// TODO Roth: complete
 public class FixedTree<T> implements Tree<T> {
   @Override
   public T get() {
     // TODO Auto-generated method stub
     return null;
-  }
-
-  @Override
-  public Iterator<T> iterator() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public Object[] toArray() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public <T> T[] toArray(T[] a) {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  @Override
-  public boolean add(T e) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean remove(Object o) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  @Override
-  public boolean containsAll(Collection<?> c) {
-    // TODO Auto-generated method stub
-    return false;
   }
 
   @Override
