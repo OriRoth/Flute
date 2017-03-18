@@ -227,7 +227,7 @@ public class Collections {
 
           @Override
           public T next() {
-            return fluent(next.get().suggest(supplier), __ -> next.set(initializable()));
+            return fluent(next.get().suggest(supplier), __ -> next.accept(initializable()));
           }
         };
       }
@@ -236,6 +236,6 @@ public class Collections {
 
   public static Iterable<Integer> range(int start, int end) {
     return range((Supplier<Integer>) fluent(new MInteger(start)) //
-        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.set(v + 1))), end);
+        .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.accept(v + 1))), end);
   }
 }

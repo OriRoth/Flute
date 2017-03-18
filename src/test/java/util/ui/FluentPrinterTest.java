@@ -11,9 +11,9 @@ public class FluentPrinterTest {
   public void a() {
     int x = printer(new MInteger(1)) //
         .print() //
-        .d0(i -> i.set(2)) //
+        .d0(i -> i.accept(2)) //
         .print(i -> "The current value is: " + i) //
-        .d0(i -> i.set(3)) //
+        .d0(i -> i.accept(3)) //
         .print("Some debug message") //
         .origin() //
         .intValue();

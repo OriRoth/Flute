@@ -3,8 +3,10 @@ package util.mutable;
 import static util.Test.*;
 
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
-public class M<T> {
+public class M<T> implements Supplier<T>, Consumer<T> {
   protected T value;
 
   public M(T value) {
@@ -15,13 +17,14 @@ public class M<T> {
     return new M<>(value);
   }
 
+  @Override
   public T get() {
     return value;
   }
 
-  public M<T> set(T value) {
+  @Override
+  public void accept(T value) {
     this.value = value;
-    return this;
   }
 
   @Override
@@ -38,7 +41,7 @@ public class M<T> {
   public int hashCode() {
     return Objects.hashCode(value);
   }
-  
+
   @Override
   protected Object clone() {
     return new M<>(value);
