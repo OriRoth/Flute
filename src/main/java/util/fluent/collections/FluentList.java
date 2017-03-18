@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import util.fluent.Fluent;
+import util.fluent.FluentWrapper;
 
-public class FluentList<T> extends Fluent<List<T>> {
+public class FluentList<T> extends FluentWrapper<List<T>> {
   public FluentList() {
     super(new LinkedList<>());
   }

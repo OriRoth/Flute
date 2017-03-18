@@ -9,4 +9,8 @@ public class MBoolean extends M<Boolean> {
   public boolean booleanValue() {
     return value;
   }
+
+  public MBoolean toggle() {
+    return (MBoolean) set(!get());
+  }
 }

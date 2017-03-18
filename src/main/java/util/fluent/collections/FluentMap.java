@@ -5,10 +5,10 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import util.fluent.Fluent;
+import util.fluent.FluentWrapper;
 
 @SuppressWarnings("unchecked")
-public class FluentMap<K, V> extends Fluent<Map<K, V>> {
+public class FluentMap<K, V> extends FluentWrapper<Map<K, V>> {
   public FluentMap() {
     super(new HashMap<>());
   }

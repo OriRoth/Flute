@@ -6,9 +6,9 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import util.fluent.Fluent;
+import util.fluent.FluentWrapper;
 
-public class FluentSet<T> extends Fluent<Set<T>> {
+public class FluentSet<T> extends FluentWrapper<Set<T>> {
   public FluentSet() {
     super(new HashSet<>());
   }
