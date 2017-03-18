@@ -1,4 +1,4 @@
-package util.collections;
+package util.fluent.collections;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import util.Fluent;
+import util.fluent.Fluent;
 
 public class FluentList<T> extends Fluent<List<T>> {
   public FluentList() {

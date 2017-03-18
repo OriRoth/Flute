@@ -1,4 +1,4 @@
-package util.collections;
+package util.fluent.collections;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -6,7 +6,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import util.Fluent;
+import util.fluent.Fluent;
 
 public class FluentSet<T> extends Fluent<Set<T>> {
   public FluentSet() {

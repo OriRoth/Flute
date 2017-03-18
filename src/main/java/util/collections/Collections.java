@@ -1,9 +1,9 @@
 package util.collections;
 
-import static util.Fluent.fluent;
 import static util.Initializable.initializable;
 import static util.Lazy.lazy;
 import static util.Test.equalsNullable;
+import static util.fluent.Fluent.fluent;
 import static util.mutable.M.mutable;
 
 import java.util.AbstractMap;

@@ -4,8 +4,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-import util.collections.FluentMap;
 import util.collections.Seen;
+import util.fluent.collections.FluentMap;
 
 import static util.Initializable.*;
 

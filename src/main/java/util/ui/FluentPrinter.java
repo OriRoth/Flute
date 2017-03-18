@@ -5,7 +5,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import util.Fluent;
+import util.fluent.Fluent;
 
 public class FluentPrinter<T> extends Fluent<T> {
   private final Consumer<String> printer;

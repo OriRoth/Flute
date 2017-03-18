@@ -1,11 +1,11 @@
-package util.collections;
+package util.fluent.collections;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-import util.Fluent;
+import util.fluent.Fluent;
 
 @SuppressWarnings("unchecked")
 public class FluentMap<K, V> extends Fluent<Map<K, V>> {
