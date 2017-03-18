@@ -1,6 +1,7 @@
 package util.ui;
 
 import static util.ui.FluentPrinter.*;
+import static util.fluent.Fluent.*;
 
 import org.junit.Test;
 

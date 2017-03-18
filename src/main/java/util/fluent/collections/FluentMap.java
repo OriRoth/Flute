@@ -84,6 +84,16 @@ public class FluentMap<K, V> extends FluentWrapper<Map<K, V>> {
   public FluentMap<K, V> d0(Consumer<Map<K, V>> action) {
     return (FluentMap<K, V>) super.d0(action);
   }
+  
+  @Override
+  public FluentMap<K, V> whileD0(Predicate<Map<K, V>> condition, Consumer<Map<K, V>> action) {
+    return (FluentMap<K, V>) super.whileD0(condition, action);
+  }
+  
+  @Override
+  public FluentMap<K, V> d0While(Consumer<Map<K, V>> action, Predicate<Map<K, V>> condition) {
+    return (FluentMap<K, V>) super.d0While(action, condition);
+  }
 
   @Override
   public FluentMap<K, V> validate(Predicate<Map<K, V>> predicate) {

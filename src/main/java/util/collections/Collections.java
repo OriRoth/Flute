@@ -3,6 +3,7 @@ package util.collections;
 import static util.Initializable.initializable;
 import static util.Lazy.lazy;
 import static util.Test.equalsNullable;
+import static util.fluent.Fluent.fluent;
 import static util.fluent.FluentWrapper.fluent;
 import static util.mutable.M.mutable;
 

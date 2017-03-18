@@ -43,9 +43,9 @@ import static util.Test.*;
  * @see Lazy#lazy(Supplier)
  */
 public class Initializable<T> extends M<T> {
-  private boolean initialized;
+  protected boolean initialized;
 
-  private Initializable(T value) {
+  protected Initializable(T value) {
     super(value);
   }
 
@@ -78,7 +78,7 @@ public class Initializable<T> extends M<T> {
    *           if this initializable is already initialized
    */
   protected Initializable<T> setValue(T value) {
-    if (initialized)
+    if (initialized())
       throw new IllegalStateException();
     initialized = true;
     this.value = value;

@@ -1,6 +1,8 @@
 package util.trees;
 
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.stream.Collectors;
 
 /**
  * A tree interface. In this interface, each node is a tree as well.
@@ -11,6 +13,11 @@ import java.util.Collection;
  *          tree node value type
  */
 public interface Tree<T> extends Collection<T> {
+  /**
+   * @return inner node value
+   */
+  T get();
+
   /**
    * @return direct children of this tree
    */
@@ -75,5 +82,32 @@ public interface Tree<T> extends Collection<T> {
    */
   default int numChildren() {
     return children().size();
+  }
+
+  @Override
+  default boolean isEmpty() {
+    return children().isEmpty();
+  }
+
+  @Override
+  default boolean contains(Object o) {
+    return descendants().stream().map(t -> t.get()).collect(Collectors.toList()).contains(o);
+  }
+
+  @Override
+  default Iterator<T> iterator() {
+    Collection<Tree<T>> descs = descendants();
+    return new Iterator<T>() {
+      @Override
+      public boolean hasNext() {
+        return false;
+      }
+
+      @Override
+      public T next() {
+        // TODO Auto-generated method stub
+        return null;
+      }
+    };
   }
 }

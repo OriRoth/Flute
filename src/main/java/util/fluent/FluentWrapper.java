@@ -1,7 +1,5 @@
 package util.fluent;
 
-import java.util.function.Consumer;
-
 import util.FluentAPI;
 import util.mutable.MBoolean;
 
@@ -16,12 +14,6 @@ public class FluentWrapper<O> implements Fluent<FluentWrapper<O>, O> {
 
   public static <O> FluentWrapper<O> fluent(O object) {
     return new FluentWrapper<>(object);
-  }
-
-  @FluentAPI
-  public static <O> O fluent(O object, Consumer<O> action) {
-    action.accept(object);
-    return object;
   }
 
   @FluentAPI

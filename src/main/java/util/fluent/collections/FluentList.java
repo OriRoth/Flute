@@ -101,6 +101,16 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
   public FluentList<T> d0(Consumer<List<T>> action) {
     return (FluentList<T>) super.d0(action);
   }
+  
+  @Override
+  public FluentList<T> whileD0(Predicate<List<T>> condition, Consumer<List<T>> action) {
+    return (FluentList<T>) super.whileD0(condition, action);
+  }
+  
+  @Override
+  public FluentList<T> d0While(Consumer<List<T>> action, Predicate<List<T>> condition) {
+    return (FluentList<T>) super.d0While(action, condition);
+  }
 
   @Override
   public FluentList<T> validate(Predicate<List<T>> predicate) {

@@ -81,6 +81,16 @@ public class FluentSet<T> extends FluentWrapper<Set<T>> {
   }
 
   @Override
+  public FluentSet<T> whileD0(Predicate<Set<T>> condition, Consumer<Set<T>> action) {
+    return (FluentSet<T>) super.whileD0(condition, action);
+  }
+
+  @Override
+  public FluentSet<T> d0While(Consumer<Set<T>> action, Predicate<Set<T>> condition) {
+    return (FluentSet<T>) super.d0While(action, condition);
+  }
+
+  @Override
   public FluentSet<T> validate(Predicate<Set<T>> predicate) {
     return (FluentSet<T>) super.validate(predicate);
   }

@@ -11,7 +11,7 @@ import util.fluent.collections.FluentMap;
 import static util.Initializable.*;
 
 /**
- * Lazy wrappers fpr functional interfaces.
+ * Lazy wrappers for functional interfaces.
  * 
  * @author Ori Roth
  * @since Mar 18, 2017
