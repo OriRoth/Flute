@@ -3,8 +3,8 @@ package flute.util.collections;
 import static flute.util.Initializable.initializable;
 import static flute.util.Lazy.lazy;
 import static flute.util.Test.equalsNullable;
-import static flute.util.fluent.FluentWrapper.fluent;
 import static flute.util.fluent.Fluent.fluent;
+import static flute.util.fluent.FluentWrapper.fluent;
 import static flute.util.mutable.M.mutable;
 
 import java.util.AbstractMap;

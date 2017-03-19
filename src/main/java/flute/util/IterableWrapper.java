@@ -3,8 +3,8 @@ package flute.util;
 import static flute.util.Functionals.empty;
 import static flute.util.Lazy.lazy;
 import static flute.util.PredefinedInitializable.initializable;
-import static flute.util.fluent.Fluent.fluentFor;
 import static flute.util.fluent.Fluent.fluent;
+import static flute.util.fluent.Fluent.fluentFor;
 import static flute.util.fluent.FluentWrapper.fluent;
 import static flute.util.mutable.M.mutable;
 
