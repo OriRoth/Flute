@@ -23,6 +23,7 @@ public class IterableWrapper<T> implements Iterable<T> {
   protected T first;
   protected Initializable<List<Iterable<T>>> posters = initializable(() -> new LinkedList<>());
 
+  @Decorator
   public static <T> IterableWrapper<T> get(Iterable<T> iterable) {
     return nothing((T) null).then(iterable);
   }
