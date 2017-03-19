@@ -1,11 +1,11 @@
 package util.ui;
 
-import static util.ui.FluentPrinter.*;
-import static util.fluent.Fluent.*;
+import static flute.util.fluent.Fluent.*;
+import static flute.util.ui.FluentPrinter.*;
 
 import org.junit.Test;
 
-import util.mutable.MInteger;
+import flute.util.mutable.MInteger;
 
 public class FluentPrinterTest {
   @Test

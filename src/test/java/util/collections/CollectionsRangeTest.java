@@ -1,6 +1,6 @@
 package util.collections;
 
-import static util.collections.Collections.*;
+import static flute.util.collections.Collections.*;
 
 import org.junit.Test;
 

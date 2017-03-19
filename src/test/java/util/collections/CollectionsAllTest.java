@@ -1,10 +1,10 @@
 package util.collections;
 
+import static flute.util.collections.Collections.all;
+
 import java.util.Set;
 
 import org.junit.Test;
-
-import static util.collections.Collections.all;
 
 public class CollectionsAllTest {
   @Test
