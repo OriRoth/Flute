@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import util.Decorator;
 import util.FluentAPI;
 import util.fluent.FluentWrapper;
 
@@ -20,6 +21,7 @@ public class FluentMap<K, V> extends FluentWrapper<Map<K, V>> {
   }
 
   @FluentAPI
+  @Decorator
   public static <K, V> FluentMap<K, V> fluentMap(Map<K, V> map) {
     return new FluentMap<>(map);
   }

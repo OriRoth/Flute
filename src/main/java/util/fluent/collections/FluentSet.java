@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import util.Decorator;
 import util.FluentAPI;
 import util.fluent.FluentWrapper;
 
@@ -20,6 +21,7 @@ public class FluentSet<T> extends FluentWrapper<Set<T>> {
   }
 
   @FluentAPI
+  @Decorator
   public static <T> FluentSet<T> fluentSet(Set<T> set) {
     return new FluentSet<>(set);
   }

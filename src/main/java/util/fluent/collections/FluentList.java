@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
+import util.Decorator;
 import util.FluentAPI;
 import util.fluent.FluentWrapper;
 
@@ -20,6 +21,7 @@ public class FluentList<T> extends FluentWrapper<List<T>> {
   }
 
   @FluentAPI
+  @Decorator
   public static <T> FluentList<T> fluent(List<T> list) {
     return new FluentList<>(list);
   }

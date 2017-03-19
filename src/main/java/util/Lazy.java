@@ -27,6 +27,7 @@ public class Lazy {
    *          a supplier to wrap
    * @return a lazy version of this supplier
    */
+  @Decorator
   public static <T> Supplier<T> lazy(Supplier<T> supplier) {
     Objects.requireNonNull(supplier);
     return new Supplier<T>() {
@@ -47,6 +48,7 @@ public class Lazy {
    *          a consumer to wrap
    * @return a lazy version of this consumer
    */
+  @Decorator
   public static <T> Consumer<T> lazy(Consumer<T> consumer) {
     Objects.requireNonNull(consumer);
     return new Consumer<T>() {
@@ -67,6 +69,7 @@ public class Lazy {
    *          a function to wrap
    * @return a lazy version of this function
    */
+  @Decorator
   public static <T, R> Function<T, R> lazy(Function<T, R> function) {
     Objects.requireNonNull(function);
     return new Function<T, R>() {

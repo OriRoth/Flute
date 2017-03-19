@@ -11,5 +11,4 @@ public class AbstractFluent<S> implements SimpleFluent<S> {
   public MBoolean validator() {
     return validator;
   }
-
 }
