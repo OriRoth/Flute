@@ -44,6 +44,16 @@ public class PredefinedInitializable<T> extends Initializable<T> {
     this.initializationMethod = initializationMethod;
   }
 
+  /**
+   * Define an initializable using a supplier. When {@link #get} is called and
+   * this initializable is not yet initialized, it will be initialized using the
+   * input supplier.
+   * 
+   * @param initializationMethod
+   *          initializer supplier
+   * @return initiable defined by the supplier
+   * @see #get
+   */
   public static <T> PredefinedInitializable<T> initializable(Supplier<T> initializationMethod) {
     return new PredefinedInitializable<>(initializationMethod);
   }

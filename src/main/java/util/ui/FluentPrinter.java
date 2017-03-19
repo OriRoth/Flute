@@ -65,6 +65,71 @@ public class FluentPrinter<T> extends FluentWrapper<T> {
   }
 
   /**
+   * Fluent printing of an object.
+   * 
+   * @param t
+   *          object to print
+   * @return input object
+   */
+  @FluentAPI
+  public static int print(int t) {
+    System.out.println(t);
+    return t;
+  }
+
+  /**
+   * Fluent printing of an object.
+   * 
+   * @param t
+   *          object to print
+   * @return input object
+   */
+  @FluentAPI
+  public static double print(double t) {
+    System.out.println(t);
+    return t;
+  }
+
+  /**
+   * Fluent printing of an object.
+   * 
+   * @param t
+   *          object to print
+   * @return input object
+   */
+  @FluentAPI
+  public static byte print(byte t) {
+    System.out.println(t);
+    return t;
+  }
+
+  /**
+   * Fluent printing of an object.
+   * 
+   * @param t
+   *          object to print
+   * @return input object
+   */
+  @FluentAPI
+  public static char print(char t) {
+    System.out.println(t);
+    return t;
+  }
+
+  /**
+   * Fluent printing of an object.
+   * 
+   * @param t
+   *          object to print
+   * @return input object
+   */
+  @FluentAPI
+  public static short print(short t) {
+    System.out.println(t);
+    return t;
+  }
+
+  /**
    * Prints the wrapped object, if this fluent is validated.
    * 
    * @return this fluent
