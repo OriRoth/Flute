@@ -11,7 +11,7 @@ public class IterableTest {
   @Test
   public void a() {
     int c = 1;
-    for (int i : iterable(1).then(asList(2, 3, 4)).then(iterable(5)))
+    for (int i : iterable(1).then(asList(2, 3, 4)).then(5))
       assertEquals(c++, i);
     c = 1;
     for (int i : combine(iterable(1), asList(2, 3, 4), iterable(5)))

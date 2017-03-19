@@ -338,4 +338,13 @@ public class Collections {
     return range((Supplier<Integer>) fluent(new MInteger(start)) //
         .lane(m -> (Supplier<Integer>) () -> fluent(m.intValue(), v -> m.set(v + 1))), end);
   }
+
+  /**
+   * @param t
+   *          an object
+   * @return a single value collection containing this object
+   */
+  public static <T> Collection<T> asCollection(T t) {
+    return Arrays.asList(t);
+  }
 }
